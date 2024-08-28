@@ -1,6 +1,8 @@
 
 # Train Station Based Search
 
+**Note:** This project is still under development and is being actively worked on.
+
 ## Project Description
 Train Station Based Search is a web application designed to help users minimize transportation costs by finding places within walking distance of train stations, near their home, or along their commute to work. Users can register their personal information, including home and work addresses, and specify their most frequently used train line. The application assists users in discovering new places conveniently located within their regular routes, promoting cost-effective travel and daily commuting.
 
