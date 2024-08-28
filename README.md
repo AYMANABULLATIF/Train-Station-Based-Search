@@ -1,8 +1,8 @@
 
-# Keiyo Line Explorer
+# Train Station Based Search
 
 ## Project Description
-Keiyo Line Explorer is a web application that allows users to search for points of interest (e.g., restaurants, cafes, museums) along the JR Keiyo Line in Tokyo, Japan. Users can register their personal information, including home and work addresses, and specify their most frequently used train line. The application helps users discover new places within walking distance from stations along their route, offering a convenient way to explore their local area or plan activities.
+Train Station Based Search is a web application designed to help users minimize transportation costs by finding places within walking distance of train stations, near their home, or along their commute to work. Users can register their personal information, including home and work addresses, and specify their most frequently used train line. The application assists users in discovering new places conveniently located within their regular routes, promoting cost-effective travel and daily commuting.
 
 This project showcases the developer's ability to independently manage the end-to-end development of a full-stack web application, incorporating advanced features such as user authentication, data integration with Google Maps API, responsive design, and support for dark mode.
 
