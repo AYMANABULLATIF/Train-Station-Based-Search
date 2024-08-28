@@ -7,15 +7,24 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-
 </head>
 <body>
     <div class="container-fluid h-100">
         <div class="row h-100 no-gutters">
             <!-- Controls Section -->
             <div class="col-md-2" id="controls">
+                <!-- Add Registration and Login Buttons -->
+                <div class="mb-3">
+                    <button onclick="window.location.href='registration.html'" class="btn btn-primary btn-block">Register</button>
+                    <button onclick="window.location.href='login.html'" class="btn btn-secondary btn-block">Login</button>
+                </div>
 
-       
+                <!-- User Info Display -->
+                <div id="userInfo" class="user-info-container" style="display: none;">
+                    <h5>Welcome, <span id="usernameDisplay"></span></h5>
+                    <p>Train Line: <span id="trainLineDisplay"></span></p>
+                </div>
+
                 <!-- Start Station Selection -->
                 <div class="mb-2">
                     <label for="startStation">Start Station:</label>
@@ -27,11 +36,12 @@
                     <label for="endStation">End Station:</label>
                     <select id="endStation" class="form-control"></select>
                 </div>
-                                <!-- Search Input -->
-                                <div class="mb-2">
-                                    <label for="searchInput">Search for:</label>
-                                    <input type="text" id="searchInput" class="form-control" placeholder="e.g. Restaurant, Cafe, Museum">
-                                </div>
+
+                <!-- Search Input -->
+                <div class="mb-2">
+                    <label for="searchInput">Search for:</label>
+                    <input type="text" id="searchInput" class="form-control" placeholder="e.g. Restaurant, Cafe, Museum">
+                </div>
 
                 <div class="form-group">
                     <!-- Search Button -->
@@ -68,82 +78,71 @@
         </div>
     </div>
     
-            <!-- Map Display Section -->
-            <div class="col-md-4" id="map-container">
-                <div id="map" style="height: 100%;"></div>
-            </div>
-        </div>
-       <!-- Side Panel for Place Information -->
-<div id="infoPanel" class="info-panel">
-    <button id="closePanel" class="close-btn">&times;</button>
-    <h2 id="placeName"></h2>
-    <p id="placeCategory"></p>
-    <p id="placeAddress"></p>
-    <p id="placeContact"></p>
-    <p id="placeOpeningHours"></p>
-    <p id="placeRating"></p>
-    <div id="placeReviews"></div>
-    <div id="placePhotos"></div>
-    <p id="placePriceLevel"></p>
-    <p id="placeFeatures"></p>
-    <button id="openInMaps">View on Google Maps</button>
-    
-    <!-- Small map inside the side panel -->
-    <div id="smallMap" style="height: 200px; margin-top: 10px;"></div>
-
-</div>
-
+    <!-- Map Display Section -->
+    <div class="col-md-4" id="map-container">
+        <div id="map" style="height: 100%;"></div>
     </div>
-</div>
+    
+    <!-- Side Panel for Place Information -->
+    <div id="infoPanel" class="info-panel">
+        <button id="closePanel" class="close-btn">&times;</button>
+        <h2 id="placeName"></h2>
+        <p id="placeCategory"></p>
+        <p id="placeAddress"></p>
+        <p id="placeContact"></p>
+        <p id="placeOpeningHours"></p>
+        <p id="placeRating"></p>
+        <div id="placeReviews"></div>
+        <div id="placePhotos"></div>
+        <p id="placePriceLevel"></p>
+        <p id="placeFeatures"></p>
+        <button id="openInMaps">View on Google Maps</button>
+        
+        <!-- Small map inside the side panel -->
+        <div id="smallMap" style="height: 200px; margin-top: 10px;"></div>
+    </div>
 
-<!-- New Google Maps Loader Script -->
-<script>
-    (g => {
-        var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window;
-        b = b[c] || (b[c] = {});
-        var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams,
-            u = () => h || (h = new Promise(async (f, n) => {
-                await (a = m.createElement("script"));
-                e.set("libraries", [...r] + "");
-                for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]);
-                e.set("callback", c + ".maps." + q);
-                a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
-                d[q] = f;
-                a.onerror = () => h = n(Error(p + " could not load."));
-                a.nonce = m.querySelector("script[nonce]")?.nonce || "";
-                m.head.append(a);
-            }));
-        d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n))
-    })({
-        key: "AIzaSyCBuMDC3OkG1WLF5rrYXyowGAfcsimp2Ns",
-        v: "weekly",
-    });
-
-    async function initMap() {
-        await google.maps.importLibrary("maps");
-        await google.maps.importLibrary("places");  // Ensure the places library is loaded
-        await google.maps.importLibrary("geometry"); // Ensure the geometry library is loaded
-        const map = new google.maps.Map(document.getElementById("map"), {
-            center: { lat: 35.681236, lng: 139.767125 }, // Tokyo Station
-            zoom: 15,
+    <!-- New Google Maps Loader Script -->
+    <script>
+        (g => {
+            var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window;
+            b = b[c] || (b[c] = {});
+            var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams,
+                u = () => h || (h = new Promise(async (f, n) => {
+                    await (a = m.createElement("script"));
+                    e.set("libraries", [...r] + "");
+                    for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]);
+                    e.set("callback", c + ".maps." + q);
+                    a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
+                    d[q] = f;
+                    a.onerror = () => h = n(Error(p + " could not load."));
+                    a.nonce = m.querySelector("script[nonce]")?.nonce || "";
+                    m.head.append(a);
+                }));
+            d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n))
+        })({
+            key: "AIzaSyDZ0sdlA7jNR5LY8csDfd8tV0vY5ibXoY4",       
+            v: "weekly",
         });
-        console.log('Map initialized:', map);
-        populateStationOptions(); // Populate station options after the map is initialized
-    }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        initMap();
-    });
-</script>
+        async function initMap() {
+            await google.maps.importLibrary("maps");
+            await google.maps.importLibrary("places");  // Ensure the places library is loaded
+            await google.maps.importLibrary("geometry"); // Ensure the geometry library is loaded
+            const map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: 35.681236, lng: 139.767125 }, // Tokyo Station
+                zoom: 15,
+            });
+            console.log('Map initialized:', map);
+            populateStationOptions(); // Populate station options after the map is initialized
+        }
 
+        document.addEventListener('DOMContentLoaded', () => {
+            initMap();
+        });
+    </script>
 
-
-
-
-
-
-
-<script src="scriptv2.js"></script>
+    <script src="scriptv2.js"></script>
 
 </body>
 </html>

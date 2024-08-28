@@ -345,4 +345,56 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// scriptv2.js
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Simulate fetching user data from the server
+    const user = getUserData(); // This function should make an actual request to your server
+    
+    if (user) {
+        document.getElementById('userInfo').style.display = 'block';
+        document.getElementById('usernameDisplay').textContent = user.username;
+        document.getElementById('trainLineDisplay').textContent = user.trainLine;
+
+        // Use home and work addresses for searching purposes
+        const homeAddress = user.homeAddress;
+        const workAddress = user.workAddress;
+
+        // You can use homeAddress and workAddress in search-related functions
+    }
+});
+
+function getUserData() {
+    // This function makes an actual API call to fetch user data
+    return fetch('/api/user', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            // Include any necessary headers, such as authorization tokens
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to fetch user data');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {
+            return {
+                username: data.username,
+                trainLine: data.trainLine,
+                homeAddress: data.homeAddress, // Used internally for search
+                workAddress: data.workAddress  // Used internally for search
+            };
+        } else {
+            throw new Error('User data not found');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        return null; // Return null if there was an error
+    });
+}
+
 
